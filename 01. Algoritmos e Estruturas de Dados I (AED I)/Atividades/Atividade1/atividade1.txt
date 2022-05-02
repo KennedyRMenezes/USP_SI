@@ -1,0 +1,11 @@
+Imprimindo inteiro: 12683395
+Imprimindo numero: 12683395
+Imprimindo float (com cast): 12683395.000000
+Imprimindo quociente: 6341697
+Imprimindo resto: 1
+Imprimindo quadrado: 508654345
+
+
+x: 7   y: 13   z: 0x7ffc275bc6e4
+&x: 0x7ffc275bc6e4   &y: 0x7ffc275bc6e8   &z: 0x7ffc275bc6f0
+Novo valor de x: 20

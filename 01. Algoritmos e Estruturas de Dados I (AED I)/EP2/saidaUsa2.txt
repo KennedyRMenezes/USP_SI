@@ -1,0 +1,151 @@
+################# INSERINDO ####################### --- 1
+
+Log fila [elementos: 0]	- Inicio:
+                       	-    Fim:
+
+Insercao retornou false (0). [OK]
+
+Log fila [elementos: 0]	- Inicio:
+                       	-    Fim:
+
+Insercao retornou true (1). [OK]
+
+Log fila [elementos: 1]	- Inicio: [1;0]
+                       	-    Fim: [1;0]
+
+Insercao retornou true (2). [OK]
+
+Log fila [elementos: 2]	- Inicio: [1;0] [2;0]
+                       	-    Fim: [2;0] [1;0]
+
+################# ATENDENDO ####################### --- 1
+
+Log fila [elementos: 2]	- Inicio: [1;0] [2;0]
+                       	-    Fim: [2;0] [1;0]
+
+Atendimento retornou true (1), id=1. [OK]
+
+Log fila [elementos: 1]	- Inicio: [2;0]
+                       	-    Fim: [2;0]
+
+################# INSERINDO ####################### ---- 2
+
+Log fila [elementos: 1]	- Inicio: [2;0]
+                       	-    Fim: [2;0]
+
+Insercao retornou true (3). [OK]
+
+Log fila [elementos: 2]	- Inicio: [2;0] [3;0]
+                       	-    Fim: [3;0] [2;0]
+
+Insercao retornou true (4). [OK]
+
+Log fila [elementos: 3]	- Inicio: [4;1] [2;0] [3;0]
+                       	-    Fim: [3;0] [2;0] [4;1]
+
+################# SAINDO DA FILA ################## ---- 1
+
+Log fila [elementos: 3]	- Inicio: [4;1] [2;0] [3;0]
+                       	-    Fim: [3;0] [2;0] [4;1]
+
+Desistindo da fila retornou true (1).
+
+Log fila [elementos: 2]	- Inicio: [4;1] [2;0]
+                       	-    Fim: [2;0] [4;1]
+
+################# INSERINDO ####################### ---- 3
+
+Log fila [elementos: 2]	- Inicio: [4;1] [2;0]
+                       	-    Fim: [2;0] [4;1]
+
+Insercao retornou true (5). [OK]
+
+Log fila [elementos: 3]	- Inicio: [4;1] [5;1] [2;0]
+                       	-    Fim: [2;0] [5;1] [4;1]
+
+Insercao retornou true (6). [OK]
+
+Log fila [elementos: 4]	- Inicio: [4;1] [5;1] [6;1] [2;0]
+                       	-    Fim: [2;0] [6;1] [5;1] [4;1]
+
+################# ATENDENDO ####################### ----- 2
+
+Log fila [elementos: 4]	- Inicio: [4;1] [5;1] [6;1] [2;0]
+                       	-    Fim: [2;0] [6;1] [5;1] [4;1]
+
+Atendimento retornou true (2), id=4. [OK]
+
+Log fila [elementos: 3]	- Inicio: [5;1] [6;1] [2;0]
+                       	-    Fim: [2;0] [6;1] [5;1]
+
+Atendimento retornou true (3), id=5. [OK]
+
+Log fila [elementos: 2]	- Inicio: [6;1] [2;0]
+                       	-    Fim: [2;0] [6;1]
+
+Atendimento retornou true (4), id=6. [OK]
+
+Log fila [elementos: 1]	- Inicio: [2;0]
+                       	-    Fim: [2;0]
+
+Atendimento retornou true (5), id=2. [OK]
+################# INSERINDO PARTE 2 ###############  ----- 1
+
+Log fila [elementos: 0]	- Inicio:
+                       	-    Fim:
+
+Insercao retornou true (7). [OK]
+
+Log fila [elementos: 1]	- Inicio: [7;1]
+                       	-    Fim: [7;1]
+
+Insercao retornou true (8). [OK]
+
+Log fila [elementos: 2]	- Inicio: [7;1] [8;0]
+                       	-    Fim: [8;0] [7;1]
+
+Insercao retornou true (7). [OK]
+
+Log fila [elementos: 3]	- Inicio: [7;1] [8;0] [11;0]
+                       	-    Fim: [11;0] [8;0] [7;1]
+
+Insercao retornou true (9). [OK]
+
+Log fila [elementos: 4]	- Inicio: [7;1] [9;1] [8;0] [11;0]
+                       	-    Fim: [11;0] [8;0] [9;1] [7;1]
+
+Insercao retornou true (10). [OK]
+
+Log fila [elementos: 5]	- Inicio: [7;1] [9;1] [8;0] [11;0] [10;0]
+                       	-    Fim: [10;0] [11;0] [8;0] [9;1] [7;1]
+
+################# SAINDO DA FILA ##################  ----- 2
+
+Log fila [elementos: 5]	- Inicio: [7;1] [9;1] [8;0] [11;0] [10;0]
+                       	-    Fim: [10;0] [11;0] [8;0] [9;1] [7;1]
+
+Desistindo da fila retornou true (2).
+
+Log fila [elementos: 4]	- Inicio: [7;1] [9;1] [11;0] [10;0]
+                       	-    Fim: [10;0] [11;0] [9;1] [7;1]
+
+Desistindo da fila retornou true (3). [OK]
+
+Log fila [elementos: 3]	- Inicio: [7;1] [9;1] [11;0]
+                       	-    Fim: [11;0] [9;1] [7;1]
+
+Desistindo da fila retornou true (4). [OK]
+
+Log fila [elementos: 2]	- Inicio: [9;1] [11;0]
+                       	-    Fim: [11;0] [9;1]
+
+Desistindo da fila retornou true (2).
+
+Log fila [elementos: 1]	- Inicio: [9;1]
+                       	-    Fim: [9;1]
+
+Desistindo da fila retornou true (5). [OK]
+
+Log fila [elementos: 0]	- Inicio:
+                       	-    Fim:
+

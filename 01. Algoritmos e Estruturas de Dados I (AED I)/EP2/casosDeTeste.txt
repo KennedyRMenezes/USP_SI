@@ -1,0 +1,440 @@
+/*         INSERCAO                 */
+
+void teste1(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, -1, false);
+	exibirLogGAB2021(f);
+	if(res) printf("Insercao retornou true.\n");
+	else printf("Insercao retornou false.\n");
+}
+
+
+void teste2(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 0, true);
+	exibirLogGAB2021(f);
+	if(res) printf("Insercao retornou true.\n");
+	else printf("Insercao retornou false.\n");
+}
+
+void teste3(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFilaGAB2021(f, 3, true);
+	exibirLogGAB2021(f);
+	if(res) printf("Insercao retornou true.\n");
+	else printf("Insercao retornou false.\n");
+	res = inserirPessoaNaFila(f, 3, true);
+	if(res) printf("Insercao retornou true.\n");
+	else printf("Insercao retornou false.\n");
+}
+
+void teste4(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 4, false);
+	exibirLogGAB2021(f);
+	if(res) printf("Insercao retornou true.\n");
+	else printf("Insercao retornou false.\n");
+}
+
+
+void teste5(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 5, true);
+	exibirLogGAB2021(f);
+}
+
+void teste6(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 6, true);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 7, false);
+	exibirLogGAB2021(f);
+}
+
+
+void teste7(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 6, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 7, true);
+	exibirLogGAB2021(f);
+}
+
+void teste8(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 8, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 9, false);
+	exibirLogGAB2021(f);
+}
+
+void teste9(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 9, true);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 10, true);
+	exibirLogGAB2021(f);
+}
+
+void teste10(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 10, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 9, false);
+	exibirLogGAB2021(f);
+}
+
+
+void teste11(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 11, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 12, true);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 13, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 14, true);
+	exibirLogGAB2021(f);
+}
+
+
+void teste12(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	res = inserirPessoaNaFila(f, 12, true);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 13, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 14, true);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 15, true);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 16, false);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 17, false);
+	exibirLogGAB2021(f);
+}
+
+
+/*         ATENDIMENTO              */
+
+void teste13(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+}
+
+void teste14(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, false);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+}
+
+void teste15(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, true);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+}
+
+void teste16(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, false);
+	res = inserirPessoaNaFilaGAB2021(f, 3, true);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	//if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	//if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+}
+
+
+void teste17(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, false);
+	res = inserirPessoaNaFilaGAB2021(f, 2, true);
+	res = inserirPessoaNaFilaGAB2021(f, 3, false);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true, id=%i.\n",id);
+	exibirLogGAB2021(f);
+}
+
+
+
+/*      DESISTIR       */
+void teste18(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 6);
+	if(res) printf("Desistindo da fila retornou true [NOK].\n");
+	else printf("Desistindo da fila retornou false [OK]\n");
+	exibirLogGAB2021(f);
+}
+
+
+
+void teste19(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, false);
+	res = inserirPessoaNaFilaGAB2021(f, 2, true);
+	res = inserirPessoaNaFilaGAB2021(f, 3, false);
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 6);
+	if(res) printf("Desistindo da fila retornou true [NOK].\n");
+	else printf("Desistindo da fila retornou false [OK]\n");
+	exibirLogGAB2021(f);
+}
+
+
+void teste20(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, false);
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 1);
+	if(res) printf("Desistindo da fila retornou true [OK].\n");
+	else printf("Desistindo da fila retornou false [NOK]\n");
+	exibirLogGAB2021(f);
+}
+
+void teste21(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFilaGAB2021(f, 1, false);
+	res = inserirPessoaNaFilaGAB2021(f, 2, false);
+	res = inserirPessoaNaFilaGAB2021(f, 3, true);
+	res = desistirDaFila(f, 1);
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 3);
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 2);
+	exibirLogGAB2021(f);
+}
+
+/* 	MISTOS 	*/
+void teste22(){
+	PFILA f = criarFilaGAB2021();
+	bool res;
+	int id;
+	res = inserirPessoaNaFila(f, 1, false);
+	res = inserirPessoaNaFila(f, 2, false);
+	res = inserirPessoaNaFila(f, 3, true);
+	res = desistirDaFila(f, 1);
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 3);
+	exibirLogGAB2021(f);
+	res = desistirDaFila(f, 2);
+	exibirLogGAB2021(f);
+	res = inserirPessoaNaFila(f, 1, false);
+	res = inserirPessoaNaFila(f, 2, false);
+	res = inserirPessoaNaFila(f, 3, true);
+	exibirLogGAB2021(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	exibirLogGAB2021(f);
+}
+
+void teste23(){
+	PFILA f = criarFila();
+	int id;
+	bool ehPreferencial;
+	bool res;
+
+	printf("################# INSERINDO #######################\n");
+
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, -1, false);
+	if(res) printf("Insercao retornou true (0).\n");
+	else printf("Insercao retornou false (0). [OK]\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 1, false);
+	if(res) printf("Insercao retornou true (1). [OK]\n");
+	else printf("Insercao retornou false (1).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 2, false);
+	if(res) printf("Insercao retornou true (2). [OK]\n");
+	else printf("Insercao retornou false (2).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 3, false);
+	if(res) printf("Insercao retornou true (3). [OK]\n");
+	else printf("Insercao retornou false (3).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 4, true);
+	if(res) printf("Insercao retornou true (4). [OK]\n");
+	else printf("Insercao retornou false (4).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 5, true);
+	if(res) printf("Insercao retornou true (5). [OK]\n");
+	else printf("Insercao retornou false (5).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 6, true);
+	if(res) printf("Insercao retornou true (6). [OK]\n");
+	else printf("Insercao retornou false (6).\n");
+	exibirLog(f);
+
+
+	printf("################# ATENDENDO #######################\n");
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (7), id=%i. [OK]\n",id);
+	else printf("Atendimento retornou false (7).\n");
+
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (8), id=%i. [OK]\n",id);
+	else printf("Atendimento retornou false (8).\n");
+
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (9), id=%i. [OK]\n",id);
+	else printf("Atendimento retornou false (9).\n");
+
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (10), id=%i. [OK]\n",id);
+	else printf("Atendimento retornou false (10).\n");
+
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (11), id=%i. [OK]\n",id);
+	else printf("Atendimento retornou false (11).\n");
+
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (12), id=%i. [OK]\n",id);
+	else printf("Atendimento retornou false (12).\n");
+
+	exibirLog(f);
+	res = atenderPrimeiraDaFila(f, &id);
+	if(res) printf("Atendimento retornou true (13), id=%i.\n",id);
+	else printf("Atendimento retornou false (13). [OK]\n");
+	exibirLog(f);
+
+
+
+	printf("################# INSERINDO PARTE 2 ###############\n");
+
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 7, true);
+	if(res) printf("Insercao retornou true (14). [OK]\n");
+	else printf("Insercao retornou false (14).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 8, false);
+	if(res) printf("Insercao retornou true (15). [OK]\n");
+	else printf("Insercao retornou false (15).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 9, true);
+	if(res) printf("Insercao retornou true (16). [OK]\n");
+	else printf("Insercao retornou false (16).\n");
+	exibirLog(f);
+	res = inserirPessoaNaFila(f, 10, false);
+	if(res) printf("Insercao retornou true (17). [OK]\n");
+	else printf("Insercao retornou false (17).\n");
+	exibirLog(f);
+
+
+	printf("################# SAINDO DA FILA ##################\n");
+
+	exibirLog(f);
+	res = desistirDaFila(f, 6);
+	if(res) printf("Desistindo da fila retornou true (18).\n");
+	else printf("Desistindo da fila retornou false (18). [OK]\n");
+	exibirLog(f);
+	res = desistirDaFila(f, 7);
+	if(res) printf("Desistindo da fila retornou true (19). [OK]\n");
+	else printf("Desistindo da fila retornou false (19).\n");
+	exibirLog(f);
+	res = desistirDaFila(f, 8);
+	if(res) printf("Desistindo da fila retornou true (20). [OK]\n");
+	else printf("Desistindo da fila retornou false (20).\n");
+	exibirLog(f);
+	res = desistirDaFila(f, 9);
+	if(res) printf("Desistindo da fila retornou true (21). [OK]\n");
+	else printf("Desistindo da fila retornou false (21).\n");
+	exibirLog(f);
+	res = desistirDaFila(f, 10);
+	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
+	else printf("Desistindo da fila retornou false (22).\n");
+	exibirLog(f);
+
+}
+
+
+int main(int argc, char *argv[]) {
+  
+    
+  if (argc<2) return 1;
+  char comando = argv[1][0];
+  switch (comando) {
+    case 'a' : teste1(); break;
+    case 'b' : teste2(); break;
+    case 'c' : teste3(); break;
+    case 'd' : teste4(); break;
+    case 'e' : teste5(); break;
+    case 'f' : teste6(); break;
+    case 'g' : teste7(); break;
+    case 'h' : teste8(); break;
+    case 'i' : teste9(); break;
+    case 'j' : teste10(); break;
+    case 'k' : teste11(); break;
+    case 'l' : teste12(); break;
+    case 'm' : teste13(); break;
+    case 'n' : teste14(); break;
+    case 'o' : teste15(); break;
+    case 'p' : teste16(); break;
+    case 'q' : teste17(); break;
+    case 'r' : teste18(); break;
+    case 's' : teste19(); break;
+    case 't' : teste20(); break;
+    case 'u' : teste21(); break;
+    case 'v' : teste22(); break;
+    case 'w' : teste23(); break;
+    default: {while (comando != '\n') scanf("%c",&comando);};
+  } 
+  return 0;
+}
+
