@@ -1,0 +1,615 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{tabto}    
+\newcommand\mytab{\tab \hspace{-5cm}}
+\usepackage[utf8]{inputenc}
+\usepackage[normalem]{ulem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amssymb}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+
+
+ 
+\begin{document}
+\title{AEDII Arquivos}
+\author{•}
+\date{}
+\maketitle
+
+\section{Pré-Árvore B}
+
+\textcolor{white}{               }
+
+\textcolor{blue}{Estrutura interna de arquivos de dados}\\
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Armazenamento não volátil também conhecidos como memória secundária, são aqueles que em que o arquivo gravado não se perde quando "desligado". Alguns exemplos de memória secundária são: HD's externo, DVD, Pen-drives entre outros. São de capacidade maior, porém lentas e baratas.\\
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Armazenamento volátil são aqueles que em que o que nele está se perde quando o computador é desligado. São os registradores, memória cache, e memória primária. Possuem capacidade menor, são rápidas e caras.\\
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Seeking: posiciona a cabeça de L/E no local desejado; o conteúdo de todo um cilindro poder ser lido com apenas 1 seeking; movimento mais lendo da operação de leitura/escrita; deve ser reduzido ao mínimo.\\
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ O acesso do seek é direto (aleatório ou randômico), pois não há a necessidade de ler todos os dados em sequência. - Por outro lado, fitas precisam de um acesso sequencial.\\
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Paginação: capacidade de processar parte dos dados que estavam em memória secundária na memória principal (moldura de memória). Subconjunto do disco em memória principal.\\
+
+\rule{12cm}{0.4pt}\\
+
+\color{red}
+$\rightarrow$ Memória virtual\\
+\begin{itemize}
+\item paginação
+\item mapeamento de endereços
+\item reposição de páginas
+\begin{itemize}
+\item LRU - Menos Recentemente Utilizada
+\item LFU - Menos Frequentemente Utilizada
+\item FIFO - Primeiro a Entrar Primeiro a Sair\\
+\end{itemize}
+\end{itemize}
+
+\rule{12cm}{0.4pt}\\
+
+\color{black}
+$\rightarrow$ Organização de arquivos na memória secundária
+
+\begin{itemize}
+\item Bloco: unidade de transferência de dados entre memória principal e a memória secundária
+\begin{itemize}
+\item um bloco é formado por uma ou
+
+\item É comum considerar que em cada bloco pode haver vários registros\\
+Se R (tamanho fixo do registro, para
+simplificar) e B (tamanho do bloco) e R $\leq$ B:\\
+fator de blocagem fb = floor(B/R) = número de registros inteiros que cabem em um bloco
+mais páginas
+\end{itemize}
+
+\item Organização espalhada: os blocos são
+totalmente preenchidos; se um registro não
+cabe inteiramente na parte vazia do bloco,
+coloca o que couber e um ponteiro para o
+próximo bloco
+
+\item Organização não espalhada: registros não podem ser divididos. Cada bloco pode conter até fb registros.
+
+\item Alocação de Blocos:
+
+\fcolorbox{green}{white}{Blocos alocados sequencialmente}
+
+\begin{itemize}
+\item Leitura fácil (leitura sequencial é ótima, e na leitura aleatória depende da
+facilidade de localização do deslocamento do registro dentro do arquivo)
+\item Expansão complicada: se não houver espaço disponível até o próximo
+arquivo tem que ser removido para outro local
+\item Fragmentação externa (buracos entre os arquivos): maior ou menor dependendo da política de alocação - o disco pode ficar fragmentado, isto é, com vários trechos disponíveis intercortados por trechos utilizados
+\end{itemize}
+
+\begin{itemize}
+\item Métodos de ajuste sequencial
+
+\begin{itemize}
+\item Primeiro ajuste: seleciona o primeiro trecho encontrado (a partir do início da lista) grande o suficiente - \textcolor{BlueViolet}{é o mais eficiente: balanço entre tempo de achar um bloco
+de tamanho suficiente (retorna assim que achar o primeiro) e fragmentação
+(não deixa sobrar sistematicamente o menor ou maior trecho)}
+
+\item Próximo ajuste: seleciona o próximo trecho grande o suficiente (a partir do índice
+“corrente”, ajustado após a última alocação) - \textcolor{BlueViolet}{similar ao primeiro ajuste, mas chega mais rápido ao fim do
+heap}
+
+\item Melhor ajuste: seleciona o menor trecho dentre os trechos grandes o suficiente - \textcolor{BlueViolet}{pode ser o pior: gasta tempo analisando tudo e, a menos que o ajuste seja perfeito, deixa sobrar normalmente trechos pequenos que não
+podem ser reutilizados}
+
+\item Pior ajuste: seleciona o maior trecho de todos - \textcolor{BlueViolet}{tenta evitar esse desperdício, deixando sobrar trechos maiores que podem ser ainda utilizados, e assim posterga a criação de blocos
+pequenos}
+\end{itemize}
+
+\end{itemize}
+
+\fcolorbox{green}{white}{Blocos alocados sequencialmente ordenado}
+
+\begin{itemize}
+\item Leitura ordenada eficiente (sequencial) – O(b): O próximo registro pode estar no mesmo bloco
+\item Mínimo / Máximo estão no cabeçalho do arquivo –
+O(1): Isto podemos fazer para todos os tipos de alocação
+\item Busca: dá para usar busca binária (baseada nos blocos!)
+\item Inserção: cara! O(b)
+\begin{itemize}
+\item Tem que achar a posição certa : O(lg b)
+\item Tem que abrir espaço para o registro (deslocar
+todos os\\ registros com chave maior para frente) :
+O(b)
+\end{itemize}
+
+\item Exclusão: cara pelos mesmos motivos! - O(b)
+\item Modificação: busca + atualização
+\end{itemize}
+
+\fcolorbox{green}{white}{\textcolor{red}{Blocos alocados por lista ligada}}
+
+\fcolorbox{green}{white}{\textcolor{red}{Blocos com alocação indexada}}
+\color{red}
+\begin{itemize}
+\item Índices primários
+\item Índice de clustering
+\item Índices secundários
+\item Organização indexada multiníveis
+\end{itemize}
+
+\color{black}
+\end{itemize}
+
+
+\section{Árvore B}
+
+\textcolor{white}{               }
+
+$\rightarrow$ Com inspiração das árvores binárias de busca e com o dinamismo dos índices multiníveis cria-se a Árvore B.\\
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$  \fcolorbox{black}{white}{Definição: } 
+\begin{itemize}
+\item \fcolorbox{black}{white}{1. } Cada nó $x$ contém os seguintes campos
+
+\begin{itemize}
+\item $n[x]$, o número de chaves atualmente armazenadas no nó $x$;
+\item as $n[x]$ chaves, armazenadas em ordem não decrescente, de modo que $key_{1}[x] \leq key_{2}[x] \leq ... \leq key_{n}[x]$;
+\item $leaf[x]$, um valor booleano indicando se $x$ é um folha ($true$) ou um nó interno ($false$);
+\item se $x$ é um nó interno, $x$ contém $n[x] + 1$ ponteiros $c_{1}[x], c_{2}[x], ... c_{n[x]+1}[x]$ para seus filhos.
+\end{itemize}
+
+
+\item \fcolorbox{black}{white}{2. } As chaves  $key_{i}[x]$ separam as faixas de valores armazenado em cada subárvore: denotando por $key_{i}$ uma chave qualquer armazenada na subárvore com nó $c_{i}[x]$, tem-se:
+
+\begin{center}
+$k_{1} \leq key_{1}[x] \leq k_{2} \leq key_{2}[x] \leq ... \leq key_{n[x]}[x] \leq k_{n[x]+1}$
+\end{center}
+
+
+
+\item \fcolorbox{black}{white}{3. } Todas as folhas aparecem no mesmo nível, que é a altura da árvore, $h$.
+
+\item \fcolorbox{black}{white}{4. } Há um limite inferior e superior no número de chaves que um nó pode conter, expressos em termos de um inteiro fixo ${t \geq 2}$ chamado o \textit{grau mínimo} (ou $ordem$) da árvore.
+
+\begin{itemize}
+\item Todo nó que não seja a raiz deve conter pelo menos $t - 1$ chaves.
+\item Todo nó interno que não seja a raiz deve conter pelo menos $t$ filhos.
+\item Todo nó deve conter no máximo $2t - 1$ chaves (e portanto todo nó interno deve ter no máximo $2t$ filhos). Dizemos que um nó está $cheio$ se ele contiver exatamente $2t - 1$ chaves.
+\end{itemize}
+
+
+
+\item \fcolorbox{black}{white}{Altura. } Teorema: Para toda árvore B de grau mínimo $t \geq 2$ contendo $n$ chaves, sua altura $h$ máxima será:\\
+
+\begin{center}
+$h \leq \log_{t}\frac{n+1}{2}$
+\end{center}
+
+
+\end{itemize}
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Criação de uma árvore vazia\\
+
+\begin{algorithmic}[1]
+\State {BTreeCreate(T)}
+\State {$i \gets AllocateNode()$}
+\State {$leaf[x] \gets true$}
+\State {$n[x] \gets 0$}
+\State {$DiskWrite(x)$}
+\State {$root[T] \gets x$}
+\end{algorithmic}
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ \textit{B-Tree-Search} toma como entrada um ponteiro para o nó de raiz x de uma subárvore e uma chave $k$ que deve ser
+procurada nessa subárvore. Se $k$ está na B-árvore, \textit{B-Tree-Search} retorna o par ordenado $(y, i)$, que consiste em um nó $y$ e um índice $i$ tal que $key_{i}[y] = k$. Caso contrário, o procedimento retorna $NIL$. Assim, a chamada de nível superior é da forma \textit{B-Tree-Search}(root[T], k).\\
+
+\begin{algorithmic}[1]
+\State {BTreeSearch(x, k)}
+\State {$i = 1$}
+\While {$ i \leq n[x]$ e $k$\textgreater $key_{i}[x]$}
+	\State {i = i + 1}
+\EndWhile
+\If {$i\leq n[x]$ e $k = key_{i}[x]$}
+	\State \Return (x, i)
+\ElsIf{$leaf[x]$}
+	\State \Return NIL
+\Else
+       \State {$DiskRead(c_{i}[x])$}
+\EndIf
+
+\State \Return {$BTreeSearch(x.c_{i}, k)$}
+\end{algorithmic}
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Inserção ocorrem sempre nas folhas
+
+\begin{itemize}
+\item Caso o nó em que a folha será inserida estiver cheia , alguma das chaves deverá ser promovida e esse nó se subdividirá.
+\item Durante a busca da localização de inserção do nó, no caminho da raiz até uma folha, se achar um nó filho (a ser seguido) cheio, já o subdivide.
+\item Vamos assumir que o nó atual (pai do nó cheio) não é cheio, a menos da raiz que deve ser tratada separadamente
+\end{itemize}
+
+
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Divisão de um nó na árvore: \textit{BTreeSplitChild(x, i, y):} tem como entrada um nó interno \textit{x não cheio}, um índice $i$ e um nó $y$ tal que $y = c_{i}[x]$ é um filho $cheio$ de $x$. O procedimento divide $y$ em 2 e ajusta $x$ de forma que este terá um filho adicional.\\
+
+\begin{algorithmic}[1]
+\State {BTreeSplitChild(x, i, y)}
+\State {$z \gets AllocateNode()$}
+\State {$leaf[z] \gets leaf[y]$}
+\State {$n[z] \gets t-1$}
+\For {$j \gets 1$ $\textbf{to}$ $t-1$}
+	\State {$key_{j}[z] \gets key_{j+t}[y]$}
+\EndFor
+\If {not $leaf[y]$}
+	\For {$j \gets 1$ $\textbf{to}$ $t$}
+		\State {$c_{j}[z] \gets c_{j+t}[y]$}
+	\EndFor
+\EndIf
+\State {$n[y] \gets t-1$}
+\For {$j \gets n[x]$ $\textbf{downto}$ $i$}
+	\State {$key_{j+1}[x] \gets key_{j}[x]$}
+\EndFor
+\State {$key_{i}[x] \gets key_{t}[y]$}
+\State {$n[x] \gets n[x]+1$}
+\State {$DiskWrite(y)$}
+\State {$DiskWrite(z)$}
+\State {$DiskWrite(x)$}
+\end{algorithmic}
+\textcolor{white}{               }\\
+$\rightarrow \rightarrow \rightarrow$ Linhas 2-10 Aloca e inicializa um nó para ser filho da chave que será promovida.\\
+$\rightarrow \rightarrow \rightarrow$ Linha 13 Ajusta o nó que foi dividido.\\
+$\rightarrow \rightarrow \rightarrow$ Linhas 14-18 Ajusta o nó em que foi parar o nó que saiu do nó dividido.
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Iserção de uma chave na árvore com raiz T:\\
+
+\begin{algorithmic}[1]
+\State {\textbf{BTreeInsert(T, k)}}
+\State {$r \gets root[T]$}
+\If {$n[r] = 2t - 1$}
+	\State {$s \gets AllocateNode()$}
+	\State{$root[T] \gets s$}
+	\State{$leaf[s] \gets false$}
+	\State{$n[s] \gets 0$}
+	\State{$c_{1} \gets r$}
+	\State{$BTreeSplitChild(s, 1, r)$}
+	\State{$BTreeInsertNonFull(s, k)$}
+\Else
+	\State{$BTreeInsertNonFull(r, k)$}
+\EndIf
+\end{algorithmic}
+\textcolor{white}{               }\\
+
+$\rightarrow$ Iserção de uma chave em uma subárvore cuja raiz $x$ não está cheia:\\
+
+\begin{algorithmic}[1]
+\State {\textbf{BTreeInsertNonFull(x, k)}}
+\State {$i \gets n[x]$}
+\If {$leaf[x]$}
+	\While {$i \geq 1$ and $k \textless key_{i}[x]$}
+		\State {$key_{i+1}[x] \gets key_{i}[x]$}
+		\State {$i \gets i-1$}
+	\EndWhile
+	\State {$key_{i+1}[x] \gets k$}
+	\State {$n[x] \gets n[x] + 1$}
+	\State{$DiskWrite(x)$}
+\Else
+	\While {$i \geq 1$ and $k \textless key_{i}[x]$}
+		\State {$i \gets i-1$}
+	\EndWhile
+	\State {$i \gets i+1$}
+	\State{$DiskRead(c+{i}[x])$}
+	\If {$n[c_{i}[x]] = 2t -1$}
+		\State {$BTreeSplitChild(x, i, c_{i}[x]$}
+		\If {$k \textgreater key_{i}[x]$}
+			\State {$i \gets i+1$}
+		\EndIf
+	\EndIf
+	\State {$BTreeInsertNonFull(c_{i}[x], k)$}
+\EndIf
+\end{algorithmic}
+
+\rule{12cm}{0.4pt}\\
+
+$\rightarrow$ Remoção em árvores B - BTreeDelete(x, k): remoção da chave $k$ da subárvore com raiz $x$.
+
+\begin{itemize}
+
+\item \fcolorbox{black}{white}{2. } - Se a chave $k$ está no nó $x$ e $x$ é um nó interno, faça:
+
+\begin{itemize}
+\item a) Se o filho $y$ que pecede $k$ no nó $x$ tem pelo menos $t$ chaves, então encontre o predecessor de $k'$ de $k$ na subárvore com raiz $y$. Delete recursivamente $k'$, e substitua $k$ por $k'$ em $x$.
+
+\item b) Simetricamente, se o filho $z$ imediatamente após $k$ no nó $x$ tem pelo menos $t$ chaves, então encontre o sucessor $k'$ de $k$ na subárvore com raiz $z$. delete recursivamente $k'$, e substitua $k$ por $k'$ em $x$.
+
+\item c) Caso contrário, se ambos $y$ e $z$ possuem apenas $t-1$ chaves, faça a junção de $k$ e todas as chaves de $z$ em $y$, de forma que $x$ perde tanto a chave $k$ como o ponteiro para $z$, e $y$ agora contém $2t-1$ chaves. Então, libere $z$ e delete recursivamente $k$ e $y$.
+\end{itemize}
+
+\item \fcolorbox{black}{white}{3. } - Se a chave $k$ não está presente no nó interno $x$, determine a raiz $c_{i}[x]$ da subárvore apropriada que deve conter $k$ (se $k$ estiver presente na árvore). Se $c_{i}[x]$ tem apenas $t-1$ chaves, execute o passo 3a ou 3b conforme necessário para garantir que o algoritmo desça para um nó contendo pelo menos $t$ chaves. Então, continue no filho apropriado de $x$.
+
+\begin{itemize}
+\item a) Se $c_{i}[x]$ contém apenas $t-1$ chaves mas tem um irmão imediato com pelo menos $t$ chaves, dê para $c_{i}[x]$ uma chave extra movendo uma chave de $x$ para $c_{i}[x]$, movendo uma chave do irmão imediato de $c_{i}[x]$ à esquerda ou à direita, e movendo o ponteiro do filho apropriado do irmão para o nó $c_{i}[x]$.
+
+\item b) Se $c_{i}[x]$ e ambos os irmãos imediatos de $c_{i}[x]$ contêm $t-1$ chaves, faça a junção de $c_{i}[x]$ com um de seus irmãos. Isso implicará em mover uma chave de $x$ para o novo nó fundido (que se tornará a chave mediana para aquele nó).
+\end{itemize}
+
+\item \fcolorbox{black}{white}{1. } - Se a chave $k$ está no nó $x$ e $x$ é uma folha, exclua a chave $k$ de $x$. - (pelos procedimentos anteriores, já sabemos que o nó $x$ tem pelo menos $t$ chaves).
+
+\item \fcolorbox{black}{white}{*** } Quando um dos nós for a raiz
+\begin{itemize}
+\item Ela pode ter menos do que $t-1$ chaves
+\item Se ficar com zero chaves precisa desalocar o bloco e atualizar quem é a nova raiz.
+\item Precisa de uma camada extra sobre a chamada da deleção:
+
+\begin{algorithmic}[1]
+\State {\textbf{BTreeDeleteFromRoot(T, k)}}
+\State {$r \gets raiz[T]$}
+\If {$n[r] = 0$}
+	\State \Return
+\Else 
+	\State {$BTreeDelete(r,k)$}
+\EndIf
+\If {$n[r] = 0$ $\textbf{and not}$ $leaf[r]$}
+	\State {$raiz[T] \gets c1[r]$}
+	\State {$desaloca(r)$}
+\EndIf
+\end{algorithmic}
+
+
+\end{itemize}
+
+\end{itemize}
+
+
+
+\subsection{Hashing (Espalhamento): Tenenbaum cap 7.4} 
+
+\begin{itemize}
+\item Considere uma conjunto de chaves $k$ e seja $I$ conjunto de índices.\\
+$\rightarrow$ $I = \{0, 1, 2, ... , I-1\}$\\
+
+
+\begin{table}[h]
+\centering
+\caption{Tabela com índices}
+\begin{tabular}{|c|}
+ \hline 
+ 0\\ 
+ \hline
+ 1\\
+ \hline
+ 2\\
+ \hline
+ .\\ 
+ \hline
+ .\\ 
+ \hline
+ .\\ 
+ \hline
+ $I-1$\\ 
+ \hline
+\end{tabular}
+\end{table}
+
+\item Uma função hash, denotada por $h(k)$\\
+$h: k \rightarrow I$ para cada chave associa-se um único índice. A idéia é que o custo de uma busca seja $O(1)$.
+\begin{itemize}
+\item Ex: $h(k) = k$ $\%$ $T$, onde $T$ é o tamanho do conjunto de índices.
+
+\begin{equation}
+  {Colisao} =
+    \begin{cases}
+      {h(53)} = 3\\
+      {h(13)} = 3\\
+    \end{cases}       
+\end{equation}
+
+*colisão é o fato de duas chaves distintas $k_{1}$ e $k_{2}$ serem associadas ao mesmo índice.
+\end{itemize}
+
+\item Tratamento de Colisões\\
+$\rightarrow$ Endereçamento aberto: consiste em uma função chamada de $rehash - rh(k)$\\
+\\
+\color{white}
+$\rightarrow$
+\color{black}
+$\rightarrow$ $rh: I \rightarrow I$\\
+\color{white}
+$\rightarrow$
+\color{black}
+$\rightarrow$ Essa função é responsável por ``realocar" a chave na qual houve uma colisão.\\
+\color{white}
+$\rightarrow$
+\color{black}
+*há um limite no tamanho da lista e o tempo de busca.\\
+\\
+$\rightarrow$ Dadas funções $h(k)$ e $rh(i)$
+\begin{algorithmic}[1]
+\State {\textbf{bool search (int k)}}
+\State {$int$ $p = h(k)$}
+\While {$(T[p]$ \textbf{is not} $k)$ \textbf{and} $(T[p]$ \textbf{is not} $-1))$}
+		\State {$p = r//h(k)$}
+	\EndWhile
+\If {$T[p] == -1$}
+	\State \Return false
+\Else 
+	\State \Return true
+\EndIf
+\end{algorithmic}
+\color{white}
+$\rightarrow$
+\color{black}
+o laço entrará num loop infinito caso a tabela esteja totalmente cheia. Uma alternativa é definir como cheia a $tabela-1$ para garantir que a busca termine.\\
+
+\begin{algorithmic}[1]
+\State {\textbf{bool insert (int k)}}
+\State {$int$ $p = h(k)$}
+\While {$(T[p]$ \textbf{is not} $k)$ \textbf{and} $(T[p]$ \textbf{is not} $-1))$}
+		\State {$p = rh(p) $}
+	\EndWhile
+\If {$T[p] == -1$}
+	\State {$T[p] = k$}
+	\State \Return true
+\Else 
+	\State \Return false
+\EndIf
+\end{algorithmic}
+
+\color{white}
+$\rightarrow$
+\color{black}
+
+\begin{algorithmic}[1]
+\State {\textbf{bool remove (int k)}}
+\State {$int$ $p = h(k)$}
+\While {$(T[p]$ \textbf{is not} $k)$ \textbf{and} $(T[p]$ \textbf{is not} $-1))$}
+		\State {$p = rh(p) $}
+	\EndWhile
+\If {$T[p] == k$}
+	\State {$T[p] =$ $?$ \textcolor{gray}{//o que fazer?}}
+\EndIf
+\end{algorithmic}
+
+\color{white}
+$\rightarrow$
+\color{black}
+Atualizar as funções de busca e inserção considerando o marcador de removido.\\
+\color{white}
+$\rightarrow \rightarrow$
+\color{black}
+$\rightarrow$ a função de busca não muda\\
+\color{white}
+$\rightarrow \rightarrow$
+\color{black}
+$\rightarrow$ a função de inserção precisa considerar o marcador de removido.\\
+
+$\downarrow$ insert modificado.
+\begin{algorithmic}[1]
+\State {\textbf{bool insert (int k)}}
+\State {$int$ $p = h(k)$}
+\State {$int$ $temp = -1$}
+\While {$(T[p]$ \textbf{is not} $k)$ \textbf{and} $(T[p]$ \textbf{is not} $-1))$}
+		\If{$T[p] == -2$}
+			\State{$temp = p$}
+		\EndIf
+		\State {$p = rh(p)$}
+	\EndWhile
+\If {$T[p] == k$}
+	\State \Return false
+\Else
+	\If {$temp$ \textbf{is not} $-1$}
+		\State {$T[temp] = k$}
+	\Else
+		\State {$T[p] = k$}
+		\State \Return true
+	\EndIf	
+\EndIf
+\end{algorithmic}
+
+\begin{itemize}
+\item  \fcolorbox{white}{pink}{Eficiência dos métodos de $rehash$}\\
+\\
+$\rightarrow$ Uma medida de eficiencia é contar o número de posições examinadas(probabilidade) antes de encontrar uma chave.\\
+$\rightarrow$ O número médio (valores altos de T) de consultas para $\frac{2T - n+1}{2T - 2n+2}$ onde $n$ é o número de chaves presentes na tabela.\\
+$\rightarrow$ Define-se por \textit{lead factor} $(lf)\frac{n}{T}$ (fração da tabela que está preenchida)\\
+$\rightarrow$ Inicialmente todas as posições da tabela tem a mesma probabilidade de serem preenchidas. A medida que a tabela vai enchendo, algumas posições tem um aumento nessa probabilidade.\\
+$\rightarrow$ Uma forma de eliminar a \fcolorbox{black}{white}{aglomeração primária} é fazer com que a função $rh()$ dependa de dois argumentos $rh(i,j)$ onde $i$ é o número de vezes que a função $rh()$ for aplicada.\\ $rh(i, j) = (i+j)$ $\%$ $T$.\\
+\\
+$rh(i, 1) = (i+1)$ $\%$ $T$\\
+$rh(i, 2) = (i+2)$ $\%$ $T$\\
+$rh(i, 3) = (i+3)$ $\%$ $T$\\
+
+$\rightarrow$ Uma variação dessa técnica é usar uma permutação aleatória de $0$ até $T-1$.\\
+\begin{center}
+$(p_{0}, p_{1}, p_{2}, ... ,p_{t+1})$ e define o $rh(j)$ como $(h(r) + pj)$ $\%$ $T$
+\end{center}
+$\rightarrow$ Uma terceira abordagem é $rh(j) = (h(r) + j^2)$ $\%$ $T$.\\
+$\rightarrow$ Uma quarta opção é $rh(i, k) = (i + h_{key})$ $\%$ $T$.\\
+\color{white}
+$\rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow$
+\color{black}
+$\hookrightarrow$ $h_{key} = (1 + h(k))$ $\%$ $T$.\\ 
+
+\item \fcolorbox{white}{pink}{Aglomeração Secundária}\\
+$\rightarrow$ chaves com o mesmo valor de $hash$, isto é, $k_{1}$ \textcolor{red}{$\neq^*$} $k_{2}$ e $h(k_{1})$ = $h(k_{2})$ tendem a seguir o mesmo $rehash$ até serem inseridas.\\
+$\rightarrow$ uma forma de eliminar a aglomeração secundária é chamada de \emph{duplo hash} e usa duas funções $hash$ $h_{1}$ e $h_{2}$ usada na fase inicial, isto é, para determinar a posição da chave na tabela. Se a posição estiver ocupada o $rehash$ fica dessa forma:
+\begin{center}
+$rh(i, k) = (1 + h_{2}(k))$ $\%$ $T$
+\end{center}
+\end{itemize}
+
+\end{itemize}
+\pagebreak
+
+\subsection{Tabela hash ordenada}
+
+A idéia geral é manter as chaves que colidirem na mesma posição em ordem descrescente.
+
+\begin{algorithmic}[1]
+\State {\textbf{int insert (int key)}}
+\State {$int$ $i, $ $j, $ $tempKey, $ $nKey$}
+\State {$bool$ $first$}
+\State {$i = h(key)$}
+\State {$nKey = key$}
+\State {$first = true$}
+\While {$Table[i] > nKey$}
+	\State {$i = rh(i)$}
+\EndWhile
+\State {$int$ $tk$ $= Table[i]$}
+\While {$( (tk$ \textbf{is not} $-1)$ \textbf{and} $(tk$ \textbf{is not} $nKey)$}
+	\State {$tempKey = Table[i]$}
+	\color{BlueViolet}
+	\If {$tempKey$ $\textless$ $nKey$}
+		\color{black}
+		\State {$Table[i] = nKey$}
+		\State {$nKey = tempKey$}
+		\If{$first$}
+			\State {$j = i$}
+			\State {$first = false$}
+		\EndIf
+	\color{BlueViolet}
+	\EndIf
+	\color{black}
+		\State {$i = rh(i)$}
+		\State {$tk = Table[i]$}
+	
+\EndWhile
+\If {$tk == -1$}
+	\State {$Table[i] = nKey$}
+\EndIf
+\If {$first$}
+	\State \Return {$i$}
+\Else
+	\State \Return {$j$}
+\EndIf
+
+\end{algorithmic}
+
+O que permite que as chaves fiquem ordenadas e que a busca seja bem-sucedida é o $if$ $(13-20)$. Com ele as chaves só serão movidas se o elemento a ser inserido for maior que a chave em que está localizado o seu hash.
+\pagebreak
+
+\section{Notas}
+\textcolor{white}{.}\\
+$\rightarrow$ O que está de \textcolor{red}{vermelho com asterisco*} precisa ver se está correto.\\
+$\rightarrow$ O que está somente de \textcolor{red}{vermelho} é para incluir no arquivo.
+
+\end{document}
+
