@@ -549,7 +549,7 @@ $\rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \rightarrow \righta
 $\hookrightarrow$ $h_{key} = (1 + h(k))$ $\%$ $T$.\\ 
 
 \item \fcolorbox{white}{pink}{Aglomeração Secundária}\\
-$\rightarrow$ chaves com o mesmo valor de $hash$, isto é, $k_{1}$ \textcolor{red}{$\neq^*$} $k_{2}$ e $h(k_{1})$ = $h(k_{2})$ tendem a seguir o mesmo $rehash$ até serem inseridas.\\
+$\rightarrow$ chaves com o mesmo valor de $hash$, isto é, $k_{1}$ $\neq^*$ $k_{2}$ e $h(k_{1})$ = $h(k_{2})$ tendem a seguir o mesmo $rehash$ até serem inseridas.\\
 $\rightarrow$ uma forma de eliminar a aglomeração secundária é chamada de \emph{duplo hash} e usa duas funções $hash$ $h_{1}$ e $h_{2}$ usada na fase inicial, isto é, para determinar a posição da chave na tabela. Se a posição estiver ocupada o $rehash$ fica dessa forma:
 \begin{center}
 $rh(i, k) = (1 + h_{2}(k))$ $\%$ $T$
@@ -561,7 +561,7 @@ $rh(i, k) = (1 + h_{2}(k))$ $\%$ $T$
 
 \subsection{Tabela hash ordenada}
 
-A idéia geral é manter as chaves que colidirem na mesma posição em ordem descrescente.
+A idéia geral é manter as chaves que colidirem na mesma posição em ordem decrescente.
 
 \begin{algorithmic}[1]
 \State {\textbf{int insert (int key)}}
