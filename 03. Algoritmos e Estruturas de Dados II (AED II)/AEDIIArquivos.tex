@@ -2,13 +2,13 @@
 \usepackage{tabto}    
 \newcommand\mytab{\tab \hspace{-5cm}}
 \usepackage[utf8]{inputenc}
-\usepackage[normalem]{ulem}
+\usepackage{ulem}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amssymb}
 \usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{mathtools}
-
+\usepackage{cancel}
 
  
 \begin{document}
@@ -193,9 +193,33 @@ $k_{1} \leq key_{1}[x] \leq k_{2} \leq key_{2}[x] \leq ... \leq key_{n[x]}[x] \l
 \item \fcolorbox{black}{white}{Altura. } Teorema: Para toda árvore B de grau mínimo $t \geq 2$ contendo $n$ chaves, sua altura $h$ máxima será:\\
 
 \begin{center}
-$h \leq \log_{t}\frac{n+1}{2}$
+\fcolorbox{pink}{pink}{$h \leq \log_{t} \frac{(n+1)}{2}$}\\
+\textcolor{white}{$\rightarrow$}\\
+\color{RawSienna}
+$\downarrow$\\
+$n \geq 1 + (t-1) * \sum\limits_{i=1}^{\mbox h}2t^{i-1}$\\
+\textcolor{white}{$\rightarrow$}\\
+$n \geq 1 + 2(t-1) * (1 + t + t^2 + ... + t^{h-1})$\\
+\textcolor{white}{$\rightarrow$}\\
+$n \geq 1 + 2(\cancel{t-1}) * (\frac{t^h-1}{\cancel{t-1}})$\\
+\textcolor{white}{$\rightarrow$}\\
+$n \geq 1 + 2(t^h+1)$\\
+\textcolor{white}{$\rightarrow$}\\
+$n \geq 2t^h-1$\\
+\textcolor{white}{$\rightarrow$}\\
+$\frac{(n+1)}{2} \geq t^h$\\
+\textcolor{white}{$\rightarrow$}\\
+$t^h \leq \frac{(n+1)}{2}$\\
+\textcolor{white}{$\rightarrow$}\\
+\color{black}
+Aplicando $\log$ dos dois lados:\\
+\textcolor{white}{$\rightarrow$}\\
+\fcolorbox{pink}{pink}{$h \leq \log_{t} \frac{(n+1)}{2}$}
 \end{center}
 
+A altura de \textbf{pior caso} de uma árvore B é quando em todos os seus nós há um \textbf{número máximo de chaves}. Ela estaria na \textbf{altura máxima}.\\
+
+A altura de \textbf{melhor caso} de uma árvore B é quando em todos os seus nós há um \textbf{número mínimo de chaves}. Ela estaria na \textbf{altura mínima}.
 
 \end{itemize}
 
