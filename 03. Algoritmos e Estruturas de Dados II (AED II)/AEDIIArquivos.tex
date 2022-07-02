@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{algpseudocode}
 \usepackage{amsmath}
+\usepackage{mathtools}
 
 
  
@@ -605,6 +606,113 @@ A idéia geral é manter as chaves que colidirem na mesma posição em ordem dec
 
 O que permite que as chaves fiquem ordenadas e que a busca seja bem-sucedida é o $if$ $(13-20)$. Com ele as chaves só serão movidas se o elemento a ser inserido for maior que a chave em que está localizado o seu hash.
 \pagebreak
+
+\subsection{Novos métodos para a função \textit{hash}}
+
+A função hash que estudamos até agora foi a do método da divisão:
+
+\begin{center}
+$h(chave) =$ $chave$ $\%$ $T$, $T$ é o tamanho da Tabela Hash.
+\end{center}
+
+Observação: chave é um número inteiro(int)\\
+
+O que torna a função eficiente? R: Minimizar o número de colisões.\\
+\\
+\\
+Para os novos métodos e pensando na eficiência deles considere os seguintes critérios:
+
+\begin{itemize}
+\item Critério 1) Levar em consideração toda a informação contida na chave (não só o último número que era considerado no método da colisão)
+\item Critério 2) Sensibilidade a permutação (Os números 53 e 33 cairiam no mesmo índice da tabela pelo hash, mesmo sendo números diferentes, para os métodos seguintes não é isso que se deseja).
+\item Critério 3) Trabalhar com chaves alfa-numéricas.
+\end{itemize}
+\textcolor{white}{$\rightarrow$}
+\\
+\textbf{Métodos:}
+\begin{itemize}
+\item \fcolorbox{black}{white}{1 - } O método da divisão consegue melhorar resultados quando 
+
+TableSize é primo.
+
+\item \fcolorbox{black}{white}{2 - } Método multiplicativo $h(chave)$ é definido como 
+\begin{center}
+$floor(m * frac(c * chave))$,
+\end{center}
+onde $c$ é um número real entre 0 e 1, e $m$ é o tamanho da Tabela.
+Valores de $c$ com boas propriedades:
+\begin{center}
+$c_{1} = 0,6180339887$,\\
+$c_{2} = 0,3819660113$.\\
+\end{center}
+Este método usa toda a informação da chave e é sensível a permutações.
+ 
+\pagebreak
+\item \fcolorbox{black}{white}{3 - } Método do quadrado médio (para TableSize = potência de dez)\\
+O valor da chave é elevada ao quadrado e alguns dígitos do ``meio" são usados como índice.\\
+\textcolor{white}{$\rightarrow$} Exemplo:
+
+\textcolor{white}{$\rightarrow \rightarrow \rightarrow$}$T = 1000$ (índices de 0 a 999)\\
+\textcolor{white}{$\rightarrow \rightarrow \rightarrow$}$chave = 245$
+\begin{center}
+$245^2$ = 60025 $\rightarrow$ $6\fcolorbox{black}{pink}{002}5$ $\rightarrow$ $h(245) = 002$.
+\end{center}
+Este método usa toda a informação da chave e é sensível a permutações.
+
+\item \fcolorbox{black}{white}{4 - } Método da dobra\\
+Suponha uma representação binária de uma chave que segue: 
+\begin{center}
+010111001010110.
+\end{center}
+Dividindo este número em três partes:
+\begin{center}
+$\underbracket{01011}_{}$ $\underbracket{10010}_{}$ $\underbracket{10110}_{}$
+\end{center}
+E empilando para fazer operações com XOR:
+\begin{center}
+01011\\
+10010\\
+\underline{10110}\\
+01111\\
+\rotatebox[origin=c]{180}{$\Lsh$} $15_{10}$
+\end{center}
+Índice será 15.\\
+Este método usa toda a informação da chave e é sensível a permutações.
+
+\item \fcolorbox{black}{white}{5 - } Chaves alfa-numéricas\\
+Strings; char[50];\\
+\\
+chave = ``hello"\\
+Podemos interpretar uma string na base 26(alfabeto)
+
+$\underbrace{h}_{8*26^4+}$ $\underbrace{e}_{5*26^3+}$ $\underbrace{l}_{12*26^2+}$ $\underbrace{l}_{12*26^1+}$ $\underbrace{o}_{15*26^0}$ = 3.752.127\\
+
+Achando o resultado pode-se usar qualquer um dos métodos anteriores, pois com essa etapa já é o suficiente para garantir a eficiência.
+Este método contempla os três critérios.
+\end{itemize}
+
+\begin{algorithmic}[1]
+\State {\textbf{int Quadrados (int c)}}
+\State {$int$ $cs = $ $c*c$}
+\If {$((cs$ $\%$ $1000)$ $== cs)$}
+	\State \Return {$cs$}
+\EndIf
+\State {$int$ $nd = $ $0$}
+\State {$int$ $cstemp = $ $cs$}
+\While {$cstemp > 0$}
+	\State {$nd++$}
+	\State {$cstemp$ $/= 10$}
+\EndWhile
+\State {$int$ $dt = $ $\log(1000)$} \textcolor{gray}{//3}
+\State {$int$ $r = $ $nd - dt$} \textcolor{gray}{//saber quantos dígitos retirar}
+\State {$r$ $/=$ $2$} \textcolor{gray}{//funciona para par e ímpar}
+\State {$cstemp$ $=$ $cs$}
+\For {$int$ $i = 0; i $ $\textless$ $r;$ $i++$}
+	\State {$cstemp$ $/=$ $10$}
+\EndFor
+\State \Return {$cstemp$ $\%$ $1000$} \textcolor{gray}{//Pega os três dígitos do final (60025 - 5 já saiu)}
+
+\end{algorithmic}
 
 \section{Notas}
 \textcolor{white}{.}\\
