@@ -228,7 +228,7 @@ A altura de \textbf{melhor caso} de uma árvore B é quando em todos os seus nó
 $\rightarrow$ Criação de uma árvore vazia\\
 
 \begin{algorithmic}[1]
-\State {BTreeCreate(T)}
+\State {\textbf{BTreeCreate(T)}}
 \State {$i \gets AllocateNode()$}
 \State {$leaf[x] \gets true$}
 \State {$n[x] \gets 0$}
@@ -242,7 +242,7 @@ $\rightarrow$ \textit{B-Tree-Search} toma como entrada um ponteiro para o nó de
 procurada nessa subárvore. Se $k$ está na B-árvore, \textit{B-Tree-Search} retorna o par ordenado $(y, i)$, que consiste em um nó $y$ e um índice $i$ tal que $key_{i}[y] = k$. Caso contrário, o procedimento retorna $NIL$. Assim, a chamada de nível superior é da forma \textit{B-Tree-Search}(root[T], k).\\
 
 \begin{algorithmic}[1]
-\State {BTreeSearch(x, k)}
+\State {\textbf{BTreeSearch(x, k)}}
 \State {$i = 1$}
 \While {$ i \leq n[x]$ e $k$\textgreater $key_{i}[x]$}
 	\State {i = i + 1}
@@ -275,7 +275,7 @@ $\rightarrow$ Inserção ocorrem sempre nas folhas
 $\rightarrow$ Divisão de um nó na árvore: \textit{BTreeSplitChild(x, i, y):} tem como entrada um nó interno \textit{x não cheio}, um índice $i$ e um nó $y$ tal que $y = c_{i}[x]$ é um filho $cheio$ de $x$. O procedimento divide $y$ em 2 e ajusta $x$ de forma que este terá um filho adicional.\\
 
 \begin{algorithmic}[1]
-\State {BTreeSplitChild(x, i, y)}
+\State {\textbf{BTreeSplitChild(x, i, y)}}
 \State {$z \gets AllocateNode()$}
 \State {$leaf[z] \gets leaf[y]$}
 \State {$n[z] \gets t-1$}
@@ -288,6 +288,10 @@ $\rightarrow$ Divisão de um nó na árvore: \textit{BTreeSplitChild(x, i, y):} 
 	\EndFor
 \EndIf
 \State {$n[y] \gets t-1$}
+\For {$j \gets n[x]+1$ $\textbf{downto}$ $i+1$}
+	\State {$c_{j+1}[x] \gets c_{j}[x]$}
+\EndFor
+\State {$c_{i+1}[x] \gets z$}
 \For {$j \gets n[x]$ $\textbf{downto}$ $i$}
 	\State {$key_{j+1}[x] \gets key_{j}[x]$}
 \EndFor
@@ -647,7 +651,7 @@ O que torna a função eficiente? R: Minimizar o número de colisões.\\
 Para os novos métodos e pensando na eficiência deles considere os seguintes critérios:
 
 \begin{itemize}
-\item Critério 1) Levar em consideração toda a informação contida na chave (não só o último número que era considerado no método da colisão)
+\item Critério 1) Levar em consideração toda a informação contida na chave (não só o último número que era considerado no método da divisão)
 \item Critério 2) Sensibilidade a permutação (Os números 53 e 33 cairiam no mesmo índice da tabela pelo hash, mesmo sendo números diferentes, para os métodos seguintes não é isso que se deseja).
 \item Critério 3) Trabalhar com chaves alfa-numéricas.
 \end{itemize}
@@ -692,7 +696,7 @@ Dividindo este número em três partes:
 \begin{center}
 $\underbracket{01011}_{}$ $\underbracket{10010}_{}$ $\underbracket{10110}_{}$
 \end{center}
-E empilando para fazer operações com XOR:
+E empilhando para fazer operações com XOR:
 \begin{center}
 01011\\
 10010\\
